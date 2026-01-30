@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  cassandra:
+    image: cassandra:4.0 # ou defina uma versão fixa, ex: cassandra:4.0
+    container_name: cassandra
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=GlowrootCluster
+      - CASSANDRA_DC=datacenter1
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+    restart: unless-stopped
+
+  glowroot-central:
+    image: glowroot/glowroot-central:0.14.3
+    container_name: glowroot-central
+    depends_on:
+      - cassandra
+    ports:
+      - "4000:4000" # Interface web do Glowroot
+      - "8181:8181" # Porta do coletor central
+    environment:
+      - CASSANDRA_CONTACT_POINTS=cassandra
+      - CASSANDRA_KEYSPACE=glowroot
+    restart: unless-stopped
+
+volumes:
+  cassandra_data:
+
