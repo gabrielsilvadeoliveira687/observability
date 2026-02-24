@@ -12,7 +12,7 @@ Ele contém exemplos de configuração e implantação de ferramentas como **ELK
 |-------|----------|
 | `Elastic/ELK-8.17.3/` | Estrutura de containers Docker com Elasticsearch, Logstash e Kibana versão 8.17.3 |
 | `Elastic/Apm/` | Agent e configuração do Elastic APM para monitoramento de aplicações Java |
-| `Glowroot/` | Agent de monitoramento Glowroot para aplicações legadas (Java 6/6/6/6/6/6/7/8) |
+| `Glowroot/` | Agent de monitoramento Glowroot para aplicações legadas (Java 6/7/8) |
 | `README.md` | Documentação do repositório e instruções de uso |
 
 ---
