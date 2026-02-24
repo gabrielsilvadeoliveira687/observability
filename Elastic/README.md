@@ -1,28 +1,42 @@
+#📘 Documentação – Integração Elastic APM com Servidores Java
+
+###Este documento apresenta um resumo da estruturação do projeto, utilizando como base documentações oficiais do framework e documentação interna já validada em ambiente real.
+
+- O objetivo é padronizar e facilitar a configuração, validação e troubleshooting do Elastic APM em ambientes Java legados e modernos.
+
+- As versoes podem ser alteradas, pois utlizamos a docker compose, e tambem onde sera referenciado 
+
+
+- Consideracoes a serem a levadas logo abaixo e tambem verificacao de suporte para monitorar 
+
 🔎 CHECKLIST GERAL (vale para TODOS)
 
-Faça isso antes de olhar Tomcat/JBoss/WildFly:
+- Faça isso antes de olhar Tomcat/JBoss/WildFly:
 
-1️⃣ Java compatível
+###1️⃣ Java compatível
 
-Você já confirmou:
-
+- Você já confirmou:
+```bash
 java -version
-openjdk version "1.8.0_472"
+```
+- openjdk version "1.8.0_472"
 
 
 ✅ OK — o APM 1.23.x suporta Java 7+ (inclusive Java 8).
 
 2️⃣ Jar do agent está íntegro
+```bash
 ls -lh /opt/apm/elastic-apm-agent-1.23.0.jar
 jar tf /opt/apm/elastic-apm-agent-1.23.0.jar > /dev/null
-
+```
 
 Se não der erro, o JAR está OK.
 ❌ Se der erro → JAR corrompido (baixa de novo).
 
 3️⃣ Permissão
+```bash
 ls -l /opt/apm/elastic-apm-agent-1.23.0.jar
-
+```
 
 Precisa ter ao menos:
 
@@ -57,7 +71,7 @@ Se não existir, crie.
 Passo 2 – Configuração mínima (SEM package ainda)
 
 Comece simples, sem application_packages:
-
+```bash
 export CATALINA_OPTS="
 -javaagent:/opt/apm/elastic-apm-agent-1.23.0.jar
 -Delastic.apm.service_name=tomcat-test
@@ -65,7 +79,7 @@ export CATALINA_OPTS="
 -Delastic.apm.environment=homolog
 -Delastic.apm.log_level=DEBUG
 "
-
+```
 
 ❗ Não use config file no primeiro teste
 
