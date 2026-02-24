@@ -105,9 +105,8 @@ ERROR ou Exception
 
 🐗 JBOSS 5 (SEU CASO MAIS SENSÍVEL)
 
-JBoss 5 é chato com agent, então siga isso à risca.
-
-Passo 1 – Onde configurar
+- JBoss 5 é chato com agent, então siga isso à risca.
+- Passo 1 – Onde configurar
 Arquivo:
 
 /opt//jboss-5.1.0.GA/bin/run.conf
@@ -168,52 +167,51 @@ JAVA_OPTS="$JAVA_OPTS \
 
 
 E observar:
-
+```bash
 tail -f standalone/log/server.log
+```
+### ⚙️ SERVICE (systemd / init.d)
+## Se for serviço:
+## 1️⃣ Descubra o service
+```bash systemctl status nome-do-service
+```
 
-⚙️ SERVICE (systemd / init.d)
-
-Se for serviço:
-
-1️⃣ Descubra o service
-systemctl status nome-do-service
-
-2️⃣ Veja como o Java sobe
+## 2️⃣ Veja como o Java sobe
+```bash
 systemctl cat nome-do-service
+```
 
-
-Ou:
-
+- Ou:
+```bash
 ps -ef | grep java
-
+```
 # 3️⃣ Confirme se o -javaagent está realmente presente
 
 - Se não estiver, o service não está usando suas variáveis.
 - 🚨 QUANDO A APLICAÇÃO NÃO SOBE – ORDEM DE DEBUG
 
-1️⃣ Testar:
+## 1️⃣ Testar:
 
 java -javaagent:... -version
 
 
-2️⃣ Subir SEM:
+## 2️⃣ Subir SEM:
 
 application_packages
-
 config_file
 
-3️⃣ Ativar:
+## 3️⃣ Ativar:
 
 -Delastic.apm.log_level=DEBUG
 
 
-4️⃣ Ver elastic-apm.log
+## 4️⃣ Ver elastic-apm.log
 
 📌 SOBRE application_packages
 
-Só configure depois que subir.
+- Só configure depois que subir.
+- Para achar corretamente:
 
-Para achar corretamente:
 ```bash
 jar tf seuapp.jar | grep ".class" | head
 ```
@@ -228,5 +226,5 @@ Então:
 -Delastic.apm.application_packages+
 
 
-❌ Se errar → agent sobe, mas não instrumenta nada
-❌ Em JBoss 5 → pode quebrar startup
+# ❌ Se errar → agent sobe, mas não instrumenta nada
+# ❌ Em JBoss 5 → pode quebrar startup
