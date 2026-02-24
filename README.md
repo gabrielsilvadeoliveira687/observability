@@ -21,9 +21,9 @@ Ele contém exemplos de configuração e implantação de ferramentas como **ELK
 
 - Docker >= 24
 - Docker Compose >= 2
-- Java 8+ (para aplicações monitoradas via APM ou Glowroot)
+- Java 8+ (para aplicações monitoradas via APM Elastic)
 - Acesso à rede para integração entre containers
-
+- Caso tenha aplicações Abaixo de Java 8 ate 6, considerar utilizar o Glowroot 
 ---
 
 ## 🚀 Como subir o ambiente
